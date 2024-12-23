@@ -2,7 +2,6 @@
   (:refer-clojure :exclude [prn println])
   (:require [babashka.process :as proc]
             [clompress.compression]
-            [clojure.test :refer [deftest is testing]]
             [clj-http.client :as client]
             [clojure.java.io :as io]
             [cheshire.core :as json]
@@ -89,7 +88,7 @@
                                                                      (prn "FAILED" url)
                                                                      (throw e))))]))
                                             (keys (get export-schema "classes")))}]
-    (spit (format "resources/flanders/ocsf-%s-json-schema-export.json" version)
+    (spit (format "resources/threatgrid/ocsf-%s-json-schema-export.json" version)
           (-> export-json-schema
               sort-recursive
               (json/encode {:pretty true})))))
@@ -139,13 +138,13 @@
                                                                             (throw e))))))
                                                              (range nsamples)))]))
                                 (keys (get export-schema "classes")))}]
-    (try (spit (format "resources/flanders/ocsf-%s-export.json" version)
+    (try (spit (format "resources/threatgrid/ocsf-%s-export.json" version)
                (-> export-schema
                    sort-recursive
                    (json/encode {:pretty true})))
          (finally
            #_ ;;too big
-           (spit (format "test-resources/flanders/ocsf-%s-sample.json" version)
+           (spit (format "test-resources/threatgrid/ocsf-%s-sample.json" version)
                  (-> sample
                      sort-recursive
                      (json/encode {:pretty true})))))))
@@ -168,10 +167,10 @@
                       "git" "clone" (format "https://github.com/ocsf/%s.git" repo))))))
 
 (def all-ocsf-exports
-  [{:version "1.4.0-dev"
-    :nsamples 10
-    :nobjects 141
-    :nclasses 78
+  [#_{:version "1.4.0-dev"
+      :nsamples 10
+      :nobjects 141
+      :nclasses 78
     :ocsf-schema "origin/main"}
    {:version "1.3.0"
     :nsamples 10
@@ -203,7 +202,8 @@
          (gen-ocsf-json-schema (assoc m :base-url "http://localhost:8080/"))
          (ocsf-server-down))
        (finally
-         (ocsf-server-down))))
+         (ocsf-server-down)))
+  (shutdown-agents))
 
 (comment
   (sync-ocsf-export)

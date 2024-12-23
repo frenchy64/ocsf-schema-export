@@ -2,6 +2,10 @@
 
 A library to export OCSF schemas for use in Clojure.
 
+Run `./script/gen` to generate schemas.
+
+Requires docker.
+
 ## License
 
 Copyright © 2024 Cisco Systems

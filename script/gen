@@ -1,0 +1,2 @@
+#!/bin/bash
+lein run -m flanders.ocsf-test/sync-ocsf-export
