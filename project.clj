@@ -1,8 +1,8 @@
 (defproject io.github.threatgrid/ocsf-schema-export "1.0.0-SNAPSHOT"
   :description "ocsf-schema-export"
-  :url "http://github.com/frenchy64/ocsf-schema-export"
+  :url "https://github.com/threatgrid/ocsf-schema-export"
   :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+            :url "https://www.eclipse.org/legal/epl-v10.html"}
   :pedantic? :abort
   :global-vars {*warn-on-reflection* true}
   :release-tasks [["clean"]
